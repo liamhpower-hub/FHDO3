@@ -5,18 +5,19 @@ import argparse
 import numpy as np
 import csv
 
-def read_genelist(file_name):
+# def read_genelist(file_name):
     
-    gene_list = [line.rstrip('\n') for line in open(file_name)]
+    # gene_list = [line.rstrip('\n') for line in open(file_name)]
     
-    return gene_list
+    #return gene_list
+#
 
-def filter_genelist(df, file_name):
+#def filter_genelist(df, file_name):
     
-    gene_list = read_genelist(file_name)
-    df_filter = df.loc[ df['SYMBOL'].isin(gene_list) ]
+    #gene_list = read_genelist(file_name)
+    #df_filter = df.loc[ df['SYMBOL'].isin(gene_list) ]
     
-    return df_filter
+    #return df_filter
 
 def filter_canonical(df):
     
@@ -177,19 +178,19 @@ def format_biobank(tsv_in):
 
 def parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-genelist", dest="genelist", help="input genelist", required=True)    
+    # parser.add_argument("-genelist", dest="genelist", help="input genelist", required=True)    
     parser.add_argument("-tsv", dest="tsv_in", help="input tsv file", required=True)
     args = parser.parse_args()
 
-    return args.genelist,args.tsv_in
+    return args.tsv_in
 
-def run_filter(tsv_in, genelist):
+def run_filter(tsv_in):
      
     df = pd.read_csv(tsv_in ,sep="\t", dtype={'ClinVar':object,"MAX_AF": "float64"},low_memory=False)
     df['AlleleFreqH'] = df['AlleleFreqH'].replace(r'^.', '', regex=True)
 
-    df_genelist = filter_genelist(df, genelist)
-    out_tmp = tsv_in.replace("tsv","genelist.tsv")
+    # df_genelist = filter_genelist(df, genelist)
+    out_tmp = tsv_in.replace("tsv")
     df.to_csv(out_tmp, sep="\t",index=False)
 
     out1 = out_tmp.replace("tsv","removecols.stringent-filter.tsv")
@@ -209,5 +210,5 @@ def run_filter(tsv_in, genelist):
     # format_biobank(out2)
 
 # main
-genelist, tsv_in = parse_args()
-run_filter(tsv_in, genelist)
+tsv_in = parse_args()
+run_filter(tsv_in)

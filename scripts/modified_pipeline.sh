@@ -68,3 +68,13 @@ echo "---- Starting parsing and filtering with Python  -----"
 
 python $DIR/formatcsq.py -tsv ${out_prefix}.split.hmtnote.pickgene-gencode.tsv -vcf ${out_prefix}.split.hmtnote.pickgene-gencode.vcf
 python $DIR/new_filter.py -tsv ${out_prefix}.split.hmtnote.pickgene-gencode.formatcsq.tsv -genelist $genelist
+
+# move intermediate files to tmp location
+mkdir -p ${outdir}/tmp
+mv ${out_prefix}.split.hmtnote.pickgene-gencode.tsv ${outdir}/tmp
+mv ${out_prefix}.split.hmtnote.pickgene-gencode.vcf ${outdir}/tmp 
+mv ${out_prefix}.split.hmtnote.pickgene-gencode.vcf_summary.html ${outdir}/tmp
+# mv ${out_prefix}.split.hmtnote.pickgene-gencode.formatcsq.tsv ${outdir}/tmp
+mv ${out_prefix}.split.vcf ${outdir}/tmp
+mv ${out_prefix}.split.vcf.idx ${outdir}/tmp
+mv ${out_prefix}.split.hmtnote.vcf ${outdir}/tmp

@@ -208,10 +208,6 @@ def run_filter(tsv_in, genelist):
     df4 = filter_stringent(df)
     df4 = remove_cols(df4) 
     df4.to_csv(out1, sep="\t",index=False)
-    
-    df5 = filter_relaxed(df)
-    df5 = remove_cols(df5)
-    df5.to_csv(out2, sep="\t",index=False)
 
     format_biobank(out1)
     format_biobank(out2)

@@ -67,7 +67,7 @@ sh $DIR/variants_to_table.sh ${out_prefix}.split.hmtnote.pickgene-gencode.vcf $r
 echo "---- Starting parsing and filtering with Python  -----"
 
 python $DIR/formatcsq.py -tsv ${out_prefix}.split.hmtnote.pickgene-gencode.tsv -vcf ${out_prefix}.split.hmtnote.pickgene-gencode.vcf
-python $DIR/new_filter.py -tsv ${out_prefix}.split.hmtnote.pickgene-gencode.formatcsq.tsv -genelist $genelist
+python $DIR/filter.py -tsv ${out_prefix}.split.hmtnote.pickgene-gencode.formatcsq.tsv -genelist $genelist
 
 # move intermediate files to tmp location
 mkdir -p ${outdir}/tmp

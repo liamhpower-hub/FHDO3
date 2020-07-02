@@ -10,6 +10,6 @@
 
 sh run_pipeline.sh \
 -v ../test/test_raw.vcf.gz \
--g ../test/genelist.txt \
+-g ../test/FHDO3.txt \
 -o out
 

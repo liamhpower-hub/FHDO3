@@ -188,7 +188,7 @@ def run_filter(tsv_in, genelist):
     df = pd.read_csv(tsv_in ,sep="\t", dtype={'ClinVar':object,"MAX_AF": "float64"},low_memory=False)
     df['AlleleFreqH'] = df['AlleleFreqH'].replace(r'^.', '', regex=True)
 
-    df = filter_genelist(df, genelist)
+    df_genelist = filter_genelist(df, genelist)
     out_tmp = tsv_in.replace("tsv","genelist.tsv")
     df.to_csv(out_tmp, sep="\t",index=False)
 
@@ -197,13 +197,17 @@ def run_filter(tsv_in, genelist):
     
     df = pd.read_csv(out_tmp,sep="\t", dtype={'ClinVar':object,"MAX_AF": "float64"},low_memory=False)
 
-    df1 = filter_stringent(df)
+    df1 = filter_stringent(df_genelist)
     df1 = remove_cols(df1) 
     df1.to_csv(out1, sep="\t",index=False)
     
-    df2 = filter_relaxed(df)
+    df2 = filter_relaxed(df_genelist)
     df2 = remove_cols(df2)
     df2.to_csv(out2, sep="\t",index=False)
+    
+    df4 = filter_stringent(df)
+    df4 = remove_cols(df4) 
+    df4.to_csv(out1, sep="\t",index=False)
 
     format_biobank(out1)
     format_biobank(out2)
@@ -211,4 +215,3 @@ def run_filter(tsv_in, genelist):
 # main
 genelist, tsv_in = parse_args()
 run_filter(tsv_in, genelist)
-

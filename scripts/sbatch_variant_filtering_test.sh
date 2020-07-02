@@ -8,7 +8,7 @@
 #SBATCH --output=%j.out
 #SBATCH --error=%j.err
 
-sh run_pipeline.sh \
+sh modified_pipeline.sh \
 -v ../test/test_raw.vcf.gz \
 -g ../test/FHDO3.txt \
 -o out
